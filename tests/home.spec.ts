@@ -6,6 +6,12 @@ test.describe("Home page with no auth", () => {
     await page.goto('https://practicesoftwaretesting.com/');
   });
 
+  test('visual test', async ({ page }) => {
+    await expect(page).toHaveScreenshot("home-page-no-auth.png", {
+      mask: [page.getByTitle("Practice Software Testing - Toolshop")],
+    });
+  });
+
   test('check sign in', async ({ page }) => {
     //ensure the sign-in link is present
     await expect(page.getByTestId("nav-sign-in")).toHaveText("Sign in");
@@ -39,7 +45,15 @@ test.describe("Home page with customer 01 auth", () => {
     await page.goto('https://practicesoftwaretesting.com/');
   });
 
+  test('visual test authorized', async ({ page }) => {
+    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveScreenshot("home-page-customer01.png", {
+      mask: [page.getByTitle("Practice Software Testing - Toolshop")],
+    });
+  });
+
   test('test customer 01 is signed in', async ({ page }) => {
+    // ensure browser is done with all network request before screenshot
     await expect(page.getByTestId("nav-sign-in")).not.toBeVisible();
     await expect(page.getByTestId("nav-menu")).toContainText("Jane Doe");
   });
