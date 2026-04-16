@@ -18,12 +18,12 @@ test.describe("Checkout page with customer 01 auth", () => {
     await expect(page.getByTestId('nav-cart')).toBeVisible();
     await expect(page.getByTestId('cart-quantity')).toHaveText('1');
 
-    // add to cart 3 pliers
+    // add to cart 3 combination pliers
     await page.getByTestId('nav-home').click();
-    await page.getByTestId("product-01KPARA3ZYXFMW9DAR2KQV69ZJ").click();
+    await page.getByTestId("product-01KPAVR0QWS0FH7H3DZTV6GSMF").click();
     await expect(page.getByTestId('product-name')).toContainText('Pliers');
     await page.getByTestId('increase-quantity').click();
-    await page.getByTestId('increase-quantity').click(); // 3 pliers
+    await page.getByTestId('increase-quantity').click(); // 3 combination pliers
     await page.getByTestId('add-to-cart').click();
     await expect(page.getByRole('alert', { name: 'toasts.product-added-to-cart' })).toBeVisible();
     await expect(page.getByTestId('cart-quantity')).toHaveText('4');
