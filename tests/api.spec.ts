@@ -25,3 +25,24 @@ test('POST /users/login', async ({ request }) => {
     const body = await response.json();
     expect(body.access_token).toBeTruthy();
 });
+
+test('GET /products/{id}', async ({ request }) => {
+    const apiURL = "https://api.practicesoftwaretesting.com";
+    const getProductResponse = await request.get(apiURL + "/products/search?q=thor%20hammer");
+
+    expect(getProductResponse.status()).toBe(200);
+    const productBody = await getProductResponse.json();
+    const productId = productBody.data[0].id;
+
+    // different api
+    const response = await request.get(apiURL + "/products/" + productId);
+    expect(response.status()).toBe(200);
+    const apiBody = await response.json();
+
+    expect(apiBody.in_stock).toBe(true);
+    expect(apiBody.in_stock).toBe(true);
+    expect(apiBody.is_location_offer).toBeDefined();
+    expect(apiBody.is_rental).not.toBe(true);
+    expect(apiBody.name).toBe("Thor Hammer");
+    expect(apiBody.price).toBe(11.14);
+});
