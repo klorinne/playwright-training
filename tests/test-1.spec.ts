@@ -10,5 +10,5 @@ test('test', async ({ page }) => {
 test('test 2', async ({ page }) => {
   await page.goto('https://playwright.dev/');
   await page.getByRole('link', { name: 'Ambassadors' }).click();
-  await page.getByText('Butch Mayhewxss').click();
+  await page.getByText('Butch Mayhew').click();
 });
